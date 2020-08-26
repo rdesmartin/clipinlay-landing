@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo Installing dependencies
+      - NODE_ENV=development npm install
+      - if [ $DEPLOY = TRUE ] ; then  npm install -g serverless@1.74.0 ;fi
+  pre_build:
+    commands:
+      # Check code lint
+      - npm run lint:show
+      # Run tests
+      - NODE_ENV=test npm run test -- --watchAll=false
+  build:
+    commands:
+      # Build react app
+      - REACT_APP_API_URL=$API_URL npm run build
+      # Deploy serverless stack if DEPLOY == TRUE
+      - if [ $DEPLOY = TRUE ] ; then  echo Deploying serverless stack... Stage `printenv STAGE` Region `printenv REGION`  ;fi
+      - if [ $DEPLOY = TRUE ] ; then  serverless deploy --verbose --stage $STAGE --region $REGION | tee .slsoutput        ;fi
+      - if [ $DEPLOY = TRUE ] && grep -q 'Serverless Error' .slsoutput ; then echo 'Error while executing serverless deploy' && exit 1 ;fi
+
+cache:
+  paths:
+    - 'node_modules/'
