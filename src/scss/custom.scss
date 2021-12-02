@@ -1,0 +1,83 @@
+// Override default variables before the import
+$theme-colors: (
+  "primary": lightgrey
+);
+
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@200;400;700&display=swap');
+
+p {
+  font-family: 'Catamaran', sans-serif;
+}
+
+@font-face {
+font-family: "Mont";
+src: local("Mont"),
+ url("../fonts/Mont Heavy/Mont Heavy.otf") format("opentype");
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+h1, h2, h3, h4,
+.font-mont,
+.card-title {
+  font-family: 'Mont', sans-serif;
+}
+
+
+.btn-hover {
+    width: 200px;
+    font-size: 30px;
+    font-weight: 700 !important;
+    font-family: 'Catamaran';
+    color: #111 !important;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none !important;
+    background-size: 300% 100%;
+    background-position: 0 0;
+
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+
+.btn-hover:focus {
+    outline: none;
+}
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #f44e4e, #f29924, #fcfc6f, #4fef1a, #9cf6fc, #4e37fc);
+    // box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+$spacer: 1.5rem;
+$body-bg: #111111;
+$body-color: #ffffff;
+
+input {
+  color: #111111;
+}
+
+.100vh {
+  height: 100vh;
+}
+
+.show-more {
+  visibility: hidden;
+}
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
